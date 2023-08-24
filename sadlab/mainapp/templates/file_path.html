@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Settings</title>
+    <link href="{% static 'myapp/css/setting.css' %}" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <p style="width: 50vw;
+        display: block;
+        margin: auto;
+        font-size: 15px;
+        position: relative;
+    left: 100px;">UIU Automatic Assignment Evaluation System</p>
+    </header>
+    <div class="main">
+    <aside>
+        <button><a style="color: white;" href="{% url 'index' %}">Dashboard</a></button>
+        <button><a style="color: white;" href="{% url 'file-path' %}">File Path</a></button>
+        <button><a style="color: white;" href="{% url 'execution' %}">Execution</a></button>
+        <button><a style="color: white;" href="{% url 'name-format' %}">Name Format</a></button>
+
+    </aside>
+    <section>
+        <p>Name Format</p>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="fileInput">Select a Zip that contain all submissions:</label>
+            <input type="file" id="fileInput" name="selectedFile">
+            <button type="submit">Upload</button>
+            <p>{{filename}}</p>
+        </form>
+    </section>
+    </div>
+</body>
+</html>

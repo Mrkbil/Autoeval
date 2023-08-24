@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <link href="{% static 'myapp/css/Dashboard.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <aside>
+            <div class="top-icon">
+                <span  class="material-symbols-outlined">folder</span>
+                <span  class="material-symbols-outlined">play_arrow</span>
+            </div>
+            
+        </aside>
+        <article>
+            <div class="filepath">
+                <p>C:/</p>
+                <a href="{% url 'fileup' %}">
+                    <span class="material-symbols-outlined">expand_less</span>
+                </a>
+            </div>
+        </article>
+        <section>
+    
+        </section>
+    </main>
+    
+    <footer>
+
+    </footer>
+    
+</body>
+</html>

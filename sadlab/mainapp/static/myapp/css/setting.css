@@ -1,0 +1,55 @@
+body{
+    margin: 0;
+    color: aliceblue;
+}
+
+
+header{
+    height: 30px;
+    background-color: #292930;
+    border-bottom: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 12px;
+}
+
+
+header p{
+    margin: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.main{
+    display: flex;
+}
+
+aside{
+    height: 810px;
+    width: 200px;
+    overflow: auto;
+    background-color:#292930;
+    border-right: 2px solid black;
+}
+
+aside button{
+    background-color: #1E1F22;
+    width: 200px;
+    text-align: center;
+    color:white;
+    height: 30px;
+}
+
+
+section{
+    height: 800px;
+    width: 1200px;
+    background-color:#1E1F22;
+    border-right: 1px solid black;
+    padding-top: 10px;
+    padding-left: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+

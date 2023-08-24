@@ -1,0 +1,6 @@
+{
+    "file_type": "code",
+    "language": "python",
+    "znf": null,
+    "cnf": "r'^\\d{9}$'"
+}

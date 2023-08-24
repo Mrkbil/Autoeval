@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example Page</title>
+</head>
+<body>
+    <h1>Welcome to the Example Page</h1>
+    <p>This is a simple example of rendering an HTML page in Django.</p>
+    <form method="post" action="{% url 'execute_function' %}">
+        {% csrf_token %}
+        <button type="submit" class="icon-button">
+            <img src="https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg" alt="Click Me" />
+        </button>
+        <p>{{t}}</p>
+    </form>
+    
+</body>
+</html>

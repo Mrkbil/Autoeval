@@ -1,0 +1,6 @@
+{
+    "exp_input": "30\n30\n30\n",
+    "exp_output": "90.0\n",
+    "parallel_check": false,
+    "code_to_check": ""
+}

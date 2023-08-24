@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Settings</title>
+    <link href="{% static 'myapp/css/setting.css' %}" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <p style="width: 50vw;
+        display: block;
+        margin: auto;
+        font-size: 15px;
+        position: relative;
+    left: 100px;">UIU Automatic Assignment Evaluation System</p>
+    </header>
+    <div class="main">
+    <aside>
+        <button><a style="color: white;" href="{% url 'index' %}">Dashboard</a></button>
+        <button><a style="color: white;" href="{% url 'file-path' %}">File Path</a></button>
+        <button><a style="color: white;" href="{% url 'execution' %}">Execution</a></button>
+        <button><a style="color: white;" href="{% url 'name-format' %}">Name Format</a></button>
+
+    </aside>
+    <section>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Execution</p>
+            <label for="input_data">Expected Input:</label>
+            <textarea style="position: relative;
+            top: 30px;
+            left: 20px;" id="input_data" name="input_data" rows="4" cols="50"></textarea><br>
+        
+            <label for="output_data">Expected Output:</label>
+            <textarea style="position: relative;
+            top: 40px;
+            left: 10px;" type="text" id="output_data" name="output_data" rows="4" cols="50"></textarea><br>
+        
+            <!-- <label for="parallel_check">Parallel Check:</label>
+            <input type="checkbox" id="parallel_check" name="parallel_check"><br>
+        
+            <label for="code_to_check">Check Code:</label>
+            <textarea id="code_to_check" name="code_to_check" rows="4" cols="50"></textarea><br>
+         -->
+            <button style="position: relative;
+            top: 80px;
+            left: 300px;
+        " type="submit">Execute</button>
+        </form>
+        <p>{{ exe.exp_input }}</p>
+        <p>{{ exe.exp_output }}</p>
+        <p>{{ exe.parallel_check }}</p>
+        <p>{{ exe.code_to_check }}</p>
+        <p>{{status}}</p>
+    </section>
+    </div>
+</body>
+</html>
