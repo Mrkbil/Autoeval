@@ -1,7 +1,7 @@
 import ast
 import numbers
-
-from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -57,19 +57,31 @@ def register_view(request):
 
     return render(request, 'register.html')
 
-
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 def index(request):
     return render(request, 'index.html')
 
-
+@login_required()
 def homepage_view(request):
-    return render(request,'homepage.html')
+    if request.user.is_authenticated:
+        first_name = request.user.first_name
+        last_name = request.user.last_name
+    else:
+        redirect('login')
+
+    name=f", {first_name} {last_name}"
+
+    return render(request, 'homepage.html', { 'username': name})
 
 
 def automatic_eval_view(request):
     return render(request,'.html')
 
+
+@login_required()
 def manual_evaluation_view(request):
     if request.method == 'POST':
         code_file = request.FILES.get('codeFile',None)
@@ -103,6 +115,8 @@ def manual_evaluation_view(request):
         return render(request, 'Evaluation.html', context)
     return render(request,'Evaluation.html')
 
+
+@login_required()
 def plagiarism_view(request):
     if request.method == 'POST':
         code = request.POST.get('code', None)
@@ -136,6 +150,8 @@ def plagiarism_view(request):
 
     return render(request,'plagiarism.html')
 
+
+@login_required()
 def analysis_view(request):
     if request.method == 'POST':
         code = request.POST.get('code', None)
@@ -155,6 +171,8 @@ def analysis_view(request):
         return render(request,'analysis.html',context)
     return render(request,'analysis.html')
 
+
+@login_required()
 def indexs(request):
     try:
         fp=load_dict_from_json('filepath.json')

@@ -24,6 +24,7 @@ urlpatterns = [
     path('homepage/',homepage_view,name='homepage'),
     path('login/', login_view, name='login'),
     path('register/', register_view, name='register'),
+    path('logout/', logout_view, name='logout'),
 
     path('plagiarism/',plagiarism_view,name='plagiarism'),
     path('manualeval/',manual_evaluation_view,name='manualeval'),

@@ -32,7 +32,7 @@
                 <div class="container">
                     <div class="hero-inner">
                         <div class="hero-copy">
-                            <h1 class="hero-title mt-0">Welcome, Mr Rakibul Islam{{ username }}</h1>
+                            <h1 class="hero-title mt-0">Welcome {{ username }}</h1>
                             <p class="hero-paragraph">Shaping Futures with Insightful Assignment Evaluation</p>
                         </div>
                         <div class="hero-figure anime-element">
@@ -136,6 +136,7 @@
 						<h3 class="section-title mt-0">Want to contact us?</h3>
 						<div class="cta-cta">
 							<a class="button button-primary button-wide-mobile" href="#">Contact</a>
+                            <a class="button button-primary button-wide-mobile" href="{% url 'logout' %}">Logout</a>
 						</div>
 					</div>
 				</div>
