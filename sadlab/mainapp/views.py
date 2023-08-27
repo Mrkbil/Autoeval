@@ -19,6 +19,10 @@ from .functions import analysis
 from .Controller import plagiarismX
 from .Controller import manualevalX
 from .Controller import analysisX
+from .Controller import fileX
+from .Controller import exeX
+from .Controller import plagfileX
+from .Controller import formatX
 
 def login_view(request):
     if request.method == 'POST':
@@ -171,6 +175,49 @@ def analysis_view(request):
         return render(request,'analysis.html',context)
     return render(request,'analysis.html')
 
+
+def editor_view(request):
+    return render(request, 'Editor.html')
+
+def file_view(request):
+    if request.method == 'POST':
+        uploaded_file = request.FILES.get('selectedFile')
+        if uploaded_file:
+            fileX.unzip_uploaded_zip(uploaded_file)
+            context={'filename':  f'{uploaded_file.name} is Uploaded Successfully.'}
+            return render(request, 'file.html',context)
+    return render(request, 'file.html')
+
+def exe_view(request):
+    if request.method == 'POST':
+        evaluation_function = request.POST.get('evaluationFunction')
+        test_cases_file = request.FILES.get('testCasesFile')
+        if evaluation_function:
+            exeX.save_string_as_py_file(evaluation_function)
+            return render(request, 'exe.html', {'context': 'Evaluation Code is Uploaded Successfully'})
+        if test_cases_file:
+            exeX.delete_file()
+            exeX.save_uploaded_file(test_cases_file, 'TestCase.txt')
+            return render(request,'exe.html',{'context' : 'Test Case is Uploaded Successfully' })
+    return render(request, 'exe.html')
+
+def format_view(request):
+    # np = ast.literal_eval(nf['cnf'])
+    if request.method == 'POST':
+        code_name_format = request.POST.get('cnf')
+        if code_name_format:
+            formatX.save_string_to_txt_file(code_name_format)
+            return render(request, 'exe.html', {'context': f'{code_name_format} RegX set Successfully'})
+    return render(request, 'format.html')
+
+def plagfile_view(request):
+    if request.method == 'POST':
+        zip_file = request.FILES.get('zipFileInput')
+        directory_path = request.POST.get('directoryPathInput')
+        if zip_file:
+            plagfileX.unzip_uploaded_zip(zip_file)
+        if
+    return render(request, 'plagfile.html')
 
 @login_required()
 def dashboard_view(request):

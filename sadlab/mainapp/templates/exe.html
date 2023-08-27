@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Settings</title>
+    <link href="{% static 'setting.css' %}" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <p>UIU Automatic Assignment Evaluation System</p>
+    </header>
+    <div class="main">
+    <aside>
+        <button><a style="color: white;" href="{% url 'editor' %}">Dashboard</a></button>
+        <button><a style="color: white;" href="{% url 'file' %}">File Path</a></button>
+        <button><a style="color: white;" href="{% url 'exe' %}">Execution</a></button>
+        <button><a style="color: white;" href="{% url 'format' %}">Name Guidline</a></button>
+        <button><a style="color: white;" href="{% url 'plagfile' %}">Plagiarism</a></button>
+
+    </aside>
+    <section>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Execution</p>
+        <label for="evaluationFunction">Evaluation Code (optional):</label>
+        <br>
+        <textarea name="evaluationFunction" id="evaluationFunction" rows="20" cols="100" placeholder="Define evaluation function here"></textarea>
+        <br>
+        <label for="testCasesFile">Upload test cases file (optional):</label>
+        <input type="file" name="testCasesFile" id="testCasesFile" accept=".txt">
+        <br>
+        <button type="submit">Save</button>
+        </form>
+        <p>{{context}}</p>
+    </section>
+    </div>
+</body>
+</html>

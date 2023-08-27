@@ -31,12 +31,19 @@ urlpatterns = [
     path('analysis/',analysis_view,name='analysis'),
     path('automatic/',automatic_eval_view,name='automatic'),
 
+    path('editor/',editor_view,name='editor'),
+    path('file/',file_view,name='file'),
+    path('exe/',exe_view,name='exe'),
+    path('format/',format_view,name='format'),
+    path('plagfile/',plagfile_view,name='plagfile'),
 
-    path('dashboard/',dashboard_view,name='dashboard'),
 
-    path('file-path/', file_path_view, name='file-path'),
-    path('execution/', execution_view, name='execution'),
-    path('name-format/', name_format_view, name='name-format'),
+
+    # path('dashboard/',dashboard_view,name='dashboard'),
+    #
+    # path('file-path/', file_path_view, name='file-path'),
+    # path('execution/', execution_view, name='execution'),
+    # path('name-format/', name_format_view, name='name-format'),
     #path('execute_function/', execute_function, name='execute_function'),
 
 ]

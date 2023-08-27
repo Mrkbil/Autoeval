@@ -3,35 +3,63 @@
 <html lang="en">
 <head>
     <title>Dashboard</title>
-    <link href="{% static 'myapp/css/Dashboard.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'Dashboard.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
     <header>
-
+        <p>UIU Automatic Assignment Evaluation System</p>
+        <p>{{item_name}}</p>
     </header>
     <main>
         <aside>
             <div class="top-icon">
-                <span  class="material-symbols-outlined">folder</span>
-                <span  class="material-symbols-outlined">play_arrow</span>
+                <a href="{% url 'file-path' %}">
+                    <div  style="color:white;padding-bottom: 15px; padding-top: 15px;"><i class="fas fa-file"></i></div>
+                </a>
+                <a href="{% url 'index' %}?action=run">
+                <div style="color:white;padding-bottom: 15px; padding-top: 15px;"><i class="fas fa-play"></i></div>
+                </a>
+                <!-- <div style="padding-bottom: 15px;"><i class="fas fa-paste"></i></div>
+                <div style="padding-bottom: 15px;"><i class="fas fa-question-circle"></i></div> -->
             </div>
             
         </aside>
         <article>
             <div class="filepath">
-                <p>C:/</p>
-                <a href="{% url 'fileup' %}">
-                    <span class="material-symbols-outlined">expand_less</span>
-                </a>
+                <p>{{zipname}}</p>
+                <!-- <span class="material-symbols-outlined">expand_less</span> -->
+            </div>
+            <div class="filelist">
+                <ul>
+                    {% for item in items %}
+                    <li><a style="
+                        color: white;" href="{% url 'index' %}?item_name={{ item }}">{{ item }}</a></li>
+                    {% endfor %}
+                </ul>                
             </div>
         </article>
         <section>
-    
+            <p>{{info}}</p>
+            <pre>{{code}}</pre>
         </section>
     </main>
-    
+    <div class="botombar">
+        <p>Output</p>
+        <p>Description</p>
+        <p>Plagiarism</p>
+    </div>
     <footer>
+        <div class="output">
+            <pre>{{output}}</pre>
+        </div>
+        <div class="des">
+            <pre>{{des}}</pre>
+        </div>
+        <div class="plag">
+            <pre>{{plag}}</pre>
+        </div>
 
     </footer>
     

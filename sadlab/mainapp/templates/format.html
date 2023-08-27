@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Settings</title>
+    <link href="{% static 'setting.css' %}" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <p>UIU Automatic Assignment Evaluation System</p>
+    </header>
+    <div class="main">
+    <aside>
+        <button><a style="color: white;" href="{% url 'editor' %}">Dashboard</a></button>
+        <button><a style="color: white;" href="{% url 'file' %}">File Path</a></button>
+        <button><a style="color: white;" href="{% url 'exe' %}">Execution</a></button>
+        <button><a style="color: white;" href="{% url 'format' %}">Name Guidline</a></button>
+        <button><a style="color: white;" href="{% url 'plagfile' %}">Plagiarism</a></button>
+
+    </aside>
+    <section>
+        <form method="post" enctype="multipart/form-data">
+            <p>Name Format</p>
+            <form method="post">
+                {% csrf_token %}
+                
+                <label for="fileType">Select file type:</label>
+                <select id="fileType" name="fileType">
+                    <option value="code">Code</option>
+                    <!-- <option value="zip">Zip</option> -->
+                </select>
+                
+                <br>
+                
+                <label for="cnf">Code Name Format (Regular Expression):</label>
+                <input type="text" id="cnf" name="cnf" required>
+                
+                <br>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </form>
+        <p>{{context}}</p>
+    </section>
+    </div>
+</body>
+</html>
