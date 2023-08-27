@@ -26,7 +26,8 @@ urlpatterns = [
     path('register/', register_view, name='register'),
 
     path('plagiarism/',plagiarism_view,name='plagiarism'),
-    path('manualeval/',manual_evaluation_view,name='manualeval')
+    path('manualeval/',manual_evaluation_view,name='manualeval'),
+    path('analysis/',analysis_view,name='analysis'),
 
     # path('file-path/', file_path_view, name='file-path'),
     # path('execution/', execution_view, name='execution'),

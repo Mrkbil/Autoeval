@@ -17,6 +17,8 @@ from .functions import automatic_eval
 from .functions import check
 from .functions import analysis
 from .Controller import plagiarismX
+from .Controller import manualevalX
+from .Controller import analysisX
 
 def login_view(request):
     if request.method == 'POST':
@@ -69,6 +71,36 @@ def automatic_eval_view(request):
     return render(request,'.html')
 
 def manual_evaluation_view(request):
+    if request.method == 'POST':
+        code_file = request.FILES.get('codeFile',None)
+        code = request.POST.get('code',None)
+        evaluation_function = request.POST.get('evaluationFunction',None)
+        test_cases_file = request.FILES.get('testCasesFile',None)
+        if code_file:
+            manualevalX.save_uploaded_file(code_file,'code.py')
+        else:
+            if code:
+                manualevalX.save_string_as_py_file(code)
+            else:
+                manualevalX.save_string_as_py_file("None")
+
+        if evaluation_function:
+            manualevalX.save_string_as_py_file(evaluation_function,'evaluation.py')
+
+        if test_cases_file:
+            manualevalX.save_uploaded_file(test_cases_file,'TestCase.txt')
+
+        if evaluation_function:
+            result= manualevalX.evaulate_func()
+        else:
+            result=[]
+            cases,inp,out=manualevalX.read_test_cases()
+            for i in range(cases):
+                res=manualevalX.run_python_code(input_text=inp[i],expected_output=out[i])
+                result.append(res)
+        format_res=manualevalX.format_test_cases(result)
+        context = {'formatted_test_cases': format_res}
+        return render(request, 'Evaluation.html', context)
     return render(request,'Evaluation.html')
 
 def plagiarism_view(request):
@@ -104,8 +136,24 @@ def plagiarism_view(request):
 
     return render(request,'plagiarism.html')
 
-def analysis(request):
-    return render(request,'.html')
+def analysis_view(request):
+    if request.method == 'POST':
+        code = request.POST.get('code', None)
+        code_file = request.FILES.get('codeFile', None)
+        if code_file:
+            analysisX.save_uploaded_file(code_file)
+        else:
+            if code:
+                analysisX.save_string_as_py_file(code)
+            else:
+                analysisX.save_string_as_py_file("None")
+        code_content=analysisX.read_file()
+        result=analysisX.analyze_code(code_content)
+        formated_res=analysisX.format_analysis_result(result)
+        print(formated_res)
+        context={'result':formated_res}
+        return render(request,'analysis.html',context)
+    return render(request,'analysis.html')
 
 def indexs(request):
     try:
