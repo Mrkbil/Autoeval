@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UIU Automatic Code Evaluation</title>
+  <link rel="stylesheet" href="{% static 'plagiarism.css' %}">
+</head>
+<body>
+  <header>
+    <h1>UIU Automatic Code Evaluation</h1>
+    <nav>
+      <ul>
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li><a href="{% url 'plagiarism' %}">Check Plagiarism</a></li>
+        <li><a href="#">Evaluate Code</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Check Your Code for Plagiarism</h2>
+      <p>Upload a ZIP file containing your code to check for plagiarism, or paste your code below.</p>
+      
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="codeFile">Choose code file:</label>
+        <input type="file" name="codeFile" id="codeFile" accept=".py">
+        <p>Or</p>
+        <label for="code">Paste your code here:</label>
+        <textarea name="code" id="code" rows="10" placeholder="Paste your code here"></textarea>
+        <label for="codeZip">Select a zip file containing codes to Check plagiarism:</label>
+        <input type="file" name="codeZip" id="codeZip" accept=".zip">
+        <p>OR</p>
+        <label for="codeFilePath">Enter the file path:</label>
+        <input type="text" name="codeFilePath" id="codeFilePath">
+        <button style="margin-top: 20px;" type="submit">Check Plagiarism</button>
+      </form>
+
+      <ul class="result-list">
+        {% for result in results %}
+            <li>{{ result }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 UIU Automatic Code Evaluation. All rights reserved.</p>
+  </footer>
+</body>
+</html>

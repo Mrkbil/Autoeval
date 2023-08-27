@@ -16,7 +16,7 @@ from .functions import plagiarism
 from .functions import automatic_eval
 from .functions import check
 from .functions import analysis
-
+from .Controller import plagiarismX
 
 def login_view(request):
     if request.method == 'POST':
@@ -25,7 +25,7 @@ def login_view(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('homepage')
         else:
             error_message = "Invalid username or password."
             return render(request, 'login.html', {'error_message': error_message})
@@ -58,7 +58,54 @@ def register_view(request):
 
 
 def index(request):
-    return render(request, 'homepage.html')
+    return render(request, 'index.html')
+
+
+def homepage_view(request):
+    return render(request,'homepage.html')
+
+
+def automatic_eval_view(request):
+    return render(request,'.html')
+
+def manual_evaluation_view(request):
+    return render(request,'Evaluation.html')
+
+def plagiarism_view(request):
+    if request.method == 'POST':
+        code = request.POST.get('code', None)
+        code_file = request.FILES.get('codeFile', None)
+        code_zip = request.FILES.get('codeZip', None)
+        code_file_path = request.POST.get('codeFilePath', None)
+
+        if code_zip:
+            plagiarismX.unzip_uploaded_zip(code_zip)
+        if code_file:
+            plagiarismX.save_uploaded_file(code_file)
+        else:
+            if code:
+                plagiarismX.save_string_as_py_file(code)
+            else:
+                plagiarismX.save_string_as_py_file("None")
+
+        try:
+            c1 = plagiarismX.read_file()
+            print(c1)
+            if code_file_path:
+                result=plagiarismX.check_plagiarism(c1,code_file_path)
+            else:
+                result=plagiarismX.check_plagiarism(c1)
+
+            res=plagiarismX.format_results(result)
+            context = {'results':res}
+            return render(request, 'plagiarism.html', context)
+        except:
+            return render(request,'plagiarism.html')
+
+    return render(request,'plagiarism.html')
+
+def analysis(request):
+    return render(request,'.html')
 
 def indexs(request):
     try:
