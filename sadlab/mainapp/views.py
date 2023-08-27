@@ -78,7 +78,7 @@ def homepage_view(request):
 
 
 def automatic_eval_view(request):
-    return render(request,'.html')
+    return render(request,'automatic.html')
 
 
 @login_required()
@@ -173,7 +173,7 @@ def analysis_view(request):
 
 
 @login_required()
-def indexs(request):
+def dashboard_view(request):
     try:
         fp=load_dict_from_json('filepath.json')
         nf=load_dict_from_json('name_format.json')

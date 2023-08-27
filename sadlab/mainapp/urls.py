@@ -29,10 +29,14 @@ urlpatterns = [
     path('plagiarism/',plagiarism_view,name='plagiarism'),
     path('manualeval/',manual_evaluation_view,name='manualeval'),
     path('analysis/',analysis_view,name='analysis'),
+    path('automatic/',automatic_eval_view,name='automatic'),
 
-    # path('file-path/', file_path_view, name='file-path'),
-    # path('execution/', execution_view, name='execution'),
-    # path('name-format/', name_format_view, name='name-format'),
+
+    path('dashboard/',dashboard_view,name='dashboard'),
+
+    path('file-path/', file_path_view, name='file-path'),
+    path('execution/', execution_view, name='execution'),
+    path('name-format/', name_format_view, name='name-format'),
     #path('execute_function/', execute_function, name='execute_function'),
 
 ]
