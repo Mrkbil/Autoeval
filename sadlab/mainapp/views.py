@@ -56,7 +56,11 @@ def register_view(request):
     return render(request, 'register.html')
 
 
+
 def index(request):
+    return render(request, 'homepage.html')
+
+def indexs(request):
     try:
         fp=load_dict_from_json('filepath.json')
         nf=load_dict_from_json('name_format.json')

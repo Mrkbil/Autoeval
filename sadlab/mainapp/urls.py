@@ -21,11 +21,12 @@ from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name='index'),
-    path('file-path/', file_path_view, name='file-path'),
-    path('execution/', execution_view, name='execution'),
-    path('name-format/', name_format_view, name='name-format'),
     path('login/', login_view, name='login'),
     path('register/', register_view, name='register'),
+
+    #path('file-path/', file_path_view, name='file-path'),
+    #path('execution/', execution_view, name='execution'),
+    #path('name-format/', name_format_view, name='name-format'),
     #path('execute_function/', execute_function, name='execute_function'),
 
 ]
