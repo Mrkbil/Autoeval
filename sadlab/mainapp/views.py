@@ -190,8 +190,8 @@ def file_view(request):
 
 def exe_view(request):
     if request.method == 'POST':
-        evaluation_function = request.POST.get('evaluationFunction')
-        test_cases_file = request.FILES.get('testCasesFile')
+        evaluation_function = request.POST.get('evaluationFunction',None)
+        test_cases_file = request.FILES.get('testCasesFile',None)
         if evaluation_function:
             exeX.save_string_as_py_file(evaluation_function)
             return render(request, 'exe.html', {'context': 'Evaluation Code is Uploaded Successfully'})
@@ -213,10 +213,15 @@ def format_view(request):
 def plagfile_view(request):
     if request.method == 'POST':
         zip_file = request.FILES.get('zipFileInput')
-        directory_path = request.POST.get('directoryPathInput')
+        directory_path = request.POST.get('directoryPathInput',None)
         if zip_file:
             plagfileX.unzip_uploaded_zip(zip_file)
-        if
+            render(request, 'plagfile.html', {'context': f" {zip_file.name} is set for additional Plagiarism Check."})
+        if directory_path:
+            plagfileX.delete_directory()
+            plagfileX.save_string_to_txt_file(directory_path)
+            return render(request, 'plagfile.html',{'context': f" {directory_path} is set for additional Plagiarism Check."})
+
     return render(request, 'plagfile.html')
 
 @login_required()

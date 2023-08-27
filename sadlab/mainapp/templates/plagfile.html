@@ -19,19 +19,19 @@
 
     </aside>
     <section>
-        <p>Name Format</p>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <label>Select a ZIP file:</label>
-            <input type="file" accept=".zip" id="zipFileInput">
-            <br>
-            <p>Or</p>
-            <label>Enter a directory path:</label>
-            <input type="text" id="directoryPathInput">
-            <br>
-            <button type="submit">Upload</button>
-            <p>{{filename}}</p>
-        </form>
+        <p>Name Format</p>
+    <label>Select a ZIP file:</label>
+    <input type="file" accept=".zip" name="zipFileInput">
+    <br>
+    <p>Or</p>
+    <label>Enter a directory path:</label>
+    <input type="text" name="directoryPathInput">
+    <br>
+    <button type="submit">Upload</button>
+    </form>
+    <p>{{ context }}</p>
     </section>
     </div>
 </body>
