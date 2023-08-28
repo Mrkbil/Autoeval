@@ -23,6 +23,7 @@ from .Controller import fileX
 from .Controller import exeX
 from .Controller import plagfileX
 from .Controller import formatX
+from .Controller import EditorX
 
 def login_view(request):
     if request.method == 'POST':
@@ -177,7 +178,35 @@ def analysis_view(request):
 
 
 def editor_view(request):
-    return render(request, 'Editor.html')
+    filelist=EditorX.get_all_file_names()
+    context={'codelist':filelist}
+    item_name = request.GET.get('item_name', None)
+    action = request.GET.get('action')
+    if item_name is not None:
+        code=EditorX.getcode(item_name)
+        context ={ 'codelist':filelist,'code': code}
+        return render(request, 'Editor.html',context)
+
+    if (action == 'run'):
+        codes=EditorX.get_all_file_paths()
+        if(EditorX.check_eval()):
+            pass
+        else:
+            cases, inp, out = EditorX.read_test_cases()
+            result = []
+            cases, inp, out = EditorX.read_test_cases()
+            for code in codes:
+                res = manualevalX.run_python_code(filename=codes[1],input_text=inp[0], expected_output=out[0])
+                result.append(res)
+            context['info']=result
+            return render(request, 'Editor.html',context)
+        if(EditorX.check_plagpath()):
+            pass
+        else:
+            pass
+
+
+    return render(request, 'Editor.html',context)
 
 def file_view(request):
     if request.method == 'POST':
@@ -224,7 +253,6 @@ def plagfile_view(request):
 
     return render(request, 'plagfile.html')
 
-@login_required()
 def dashboard_view(request):
     try:
         fp=load_dict_from_json('filepath.json')
@@ -256,12 +284,15 @@ def dashboard_view(request):
             if(item_name is not None):
                 code_path=extrac_loc+'/'+item_name
                 code = manual_check.mannual_eval(code_path)
+                annna=analysisX.analyze_code(code)
+                aaaa=analysisX.format_analysis_result(annna)
                 result=execute.run_python_code(code_path,exe['exp_input'],exe['exp_output'])
                 res=f"Output: {result['output']}\nRuntime: {result['runtime']}\nResult: {result['error']}"
                 plagiar=plagiarism.check_man_plagiarism(code_path)
                 plag=plagiarism.convert_to_line_separated(plagiar)
                 print(plag)
                 an_sing=str(analysis.analyze_single_file(code_path))
+                an_sing=aaaa
                 return render(request,'Dashboard.html',{'items': code_list,'code':code,'item_name':item_name,'output':res,'plag':plag,'zipname':filename,'des':an_sing})
             return render(request, 'Dashboard.html', {'items': code_list,'code':auto_eval_res,'zipname':filename,'plag':all_plag,'output':worng,'des':anal})
         else:

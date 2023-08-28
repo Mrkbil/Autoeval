@@ -9,18 +9,18 @@
 </head>
 <body>
     <header>
-        <a href="{% url 'homepage' %}" style="font-style: none; color:wheat;">
-            <p>UIU Automatic Assignment Evaluation System</p>
-            </a>
+        <a href="{% url 'homepage' %}" style="color: white; text-decoration: none; font-size: 18px;">
+        <p>UIU Automatic Assignment Evaluation System</p>
+        </a>
         <p>{{item_name}}</p>
     </header>
     <main>
         <aside>
             <div class="top-icon">
-                <a href="{% url 'file' %}">
+                <a href="{% url 'file-path' %}">
                     <div  style="color:white;padding-bottom: 15px; padding-top: 15px;"><i class="fas fa-file"></i></div>
                 </a>
-                <a href="{% url 'editor' %}?action=run">
+                <a href="{% url 'dashboard' %}?action=run">
                 <div style="color:white;padding-bottom: 15px; padding-top: 15px;"><i class="fas fa-play"></i></div>
                 </a>
                 <!-- <div style="padding-bottom: 15px;"><i class="fas fa-paste"></i></div>
@@ -30,14 +30,14 @@
         </aside>
         <article>
             <div class="filepath">
-                <p>File List</p>
+                <p>{{zipname}}</p>
                 <!-- <span class="material-symbols-outlined">expand_less</span> -->
             </div>
             <div class="filelist">
                 <ul>
-                    {% for item in codelist %}
+                    {% for item in items %}
                     <li><a style="
-                        color: white;" href="{% url 'editor' %}?item_name={{ item }}">{{ item }}</a></li>
+                        color: white;" href="{% url 'dashboard' %}?item_name={{ item }}">{{ item }}</a></li>
                     {% endfor %}
                 </ul>                
             </div>

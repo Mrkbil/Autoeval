@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Settings</title>
+    <link href="{% static 'setting.css' %}" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <a href="{% url 'homepage' %}" style="color: white; text-decoration: none; font-size: 18px;">
+            <p>UIU Automatic Assignment Evaluation System</p>
+            </a>
+    </header>
+    <div class="main">
+    <aside>
+        <button><a style="color: white;" href="{% url 'dashboard' %}">Dashboard</a></button>
+        <button><a style="color: white;" href="{% url 'file-path' %}">File Path</a></button>
+        <button><a style="color: white;" href="{% url 'execution' %}">Execution</a></button>
+        <button><a style="color: white;" href="{% url 'name-format' %}">Name Format</a></button>
+
+    </aside>
+    <section>
+        <form method="post" enctype="multipart/form-data">
+            <p>Name Format</p>
+            <form method="post">
+                {% csrf_token %}
+                
+                <label for="fileType">Select file type:</label>
+                <select id="fileType" name="fileType">
+                    <option value="code">Code</option>
+                    <!-- <option value="zip">Zip</option> -->
+                </select>
+                
+                <br>
+                
+                <label for="language">Select language:</label>
+                <select id="language" name="language">
+                    <option value="python">Python</option>
+                    <!-- <option value="java">Java</option>
+                    <option value="c++">C++</option>
+                    <option value="c">C</option> -->
+                </select>
+                
+                <br>
+                
+                <!-- <label for="znf">Zip Name Format (Regular Expression):</label>
+                <input type="text" id="znf" name="znf" required> -->
+                
+                <br>
+                
+                <label for="cnf">Code Name Format (Regular Expression):</label>
+                <input type="text" id="cnf" name="cnf" required>
+                
+                <br>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </form>
+        <p>{{file_type}}</p>
+        <p>{{language}}</p>
+        <!-- <p>{{znf}}</p> -->
+        <p>{{cnf}}</p>
+        <p>{{isSelected}}</p>
+    </section>
+    </div>
+</body>
+</html>

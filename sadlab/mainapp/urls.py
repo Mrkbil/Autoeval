@@ -37,13 +37,10 @@ urlpatterns = [
     path('format/',format_view,name='format'),
     path('plagfile/',plagfile_view,name='plagfile'),
 
-
-
-    # path('dashboard/',dashboard_view,name='dashboard'),
-    #
-    # path('file-path/', file_path_view, name='file-path'),
-    # path('execution/', execution_view, name='execution'),
-    # path('name-format/', name_format_view, name='name-format'),
-    #path('execute_function/', execute_function, name='execute_function'),
+    path('dashboard/',dashboard_view,name='dashboard'),
+    path('file-path/', file_path_view, name='file-path'),
+    path('execution/', execution_view, name='execution'),
+    path('name-format/', name_format_view, name='name-format'),
+    # path('execute_function/', execute_function, name='execute_function'),
 
 ]

@@ -7,17 +7,16 @@
 </head>
 <body>
     <header>
-        <a href="{% url 'homepage' %}">
+        <a href="{% url 'homepage' %}" style="color: white; text-decoration: none; font-size: 18px;">
             <p>UIU Automatic Assignment Evaluation System</p>
             </a>
     </header>
     <div class="main">
     <aside>
-        <button><a style="color: white;" href="{% url 'editor' %}">Dashboard</a></button>
-        <button><a style="color: white;" href="{% url 'file' %}">File Path</a></button>
-        <button><a style="color: white;" href="{% url 'exe' %}">Execution</a></button>
-        <button><a style="color: white;" href="{% url 'format' %}">Name Guidline</a></button>
-        <button><a style="color: white;" href="{% url 'plagfile' %}">Plagiarism</a></button>
+        <button><a style="color: white;" href="{% url 'dashboard' %}">Dashboard</a></button>
+        <button><a style="color: white;" href="{% url 'file-path' %}">File Path</a></button>
+        <button><a style="color: white;" href="{% url 'execution' %}">Execution</a></button>
+        <button><a style="color: white;" href="{% url 'name-format' %}">Name Format</a></button>
 
     </aside>
     <section>
