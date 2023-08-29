@@ -16,13 +16,15 @@ def get_files_by_extension(directory, extension):
 
 
 
-def run_file_list(directory, extension, input='', output=''):
+def run_file_list(directory, extension, input="", output=""):
     filelist = get_files_by_extension(directory, extension)
     output_list = []
+    input = input.replace("\\n", "\n")
+    output = output.replace("\\n", "\n")
     if extension == 'py':
         for file in filelist:
             filename = os.path.basename(file)  # Get the filename without path
-            res = run_python_code(file, input, output)
+            res = run_python_code(file, input,output)
             output_list.append({'filename': filename, 'result': res})
     elif extension == 'java':
         for file in filelist:

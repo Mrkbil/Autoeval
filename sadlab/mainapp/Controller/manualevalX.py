@@ -119,5 +119,3 @@ def evaulate_func(file='C:\Autoeval\sadlab\mainapp\Storage\ManualEva\evaluation.
     res_lst=[]
     res_lst.append(eve)
     return res_lst
-
-evaulate_func()

@@ -51,6 +51,8 @@ def run_python_code(filename,input_text='30\n30\n30\n', expected_output='90.0\n'
         }
 
 
+#print(run_python_code('C:\Autoeval\sadlab\mainapp\Storage\ManualEva\code.py'))
+
 def run_java_code(filename, input_text='', expected_output=''):
     if not os.path.isfile(filename):
         return {

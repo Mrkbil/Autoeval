@@ -35,6 +35,7 @@ def login_view(request):
             return redirect('homepage')
         else:
             error_message = "Invalid username or password."
+            sage = "Invalid username or password."
             return render(request, 'login.html', {'error_message': error_message})
     return render(request, 'login.html')
 
@@ -264,19 +265,21 @@ def dashboard_view(request):
         filename = os.path.basename(fp['filename'])
         if(action=='run'):
             files_loc = os.path.splitext(fp['filename'])[0]
+            print('aaaaaaaaaaaaaaa')
             auto_eval=automatic_eval.run_file_list(files_loc,'py',exe['exp_input'],exe['exp_output'])
+            print('bbbbbbbbbbbbbbbbbbb')
             auto_eval_res=automatic_eval.format_output_to_string(auto_eval)
-            print(auto_eval_res)
-            print(files_loc)
+            # print(auto_eval_res)
+            # print(files_loc)
             pl=plagiarism.check_plagiarism_all(files_loc)
             all_plag=plagiarism.format_results(pl)
             np = ast.literal_eval(nf['cnf'])
-            print(np)
+            # print(np)
             worng=check.check_filenames_in_directory(files_loc,name_pattern=np,valid_extension='py')
             worng=str(worng)+ ' Files with wrong Submission Format'
             an=analysis.analyze_files_in_directory(files_loc)
             anal=str(analysis.format_results(an))
-            print(anal)
+            # print(anal)
         if (nf['file_type'] == 'code'):
             extrac_loc=zipextract.extract_archive_file(fp['filename'])
             code_list=file.get_filenames_in_directory(extrac_loc)
